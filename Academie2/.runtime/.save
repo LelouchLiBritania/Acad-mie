@@ -1,0 +1,9 @@
+#Mon Apr 09 17:03:22 CEST 2018
+org.modelio.module.propertytab.JavaDesigner\ v3.7.01\ GModule\ @file\:///C\:/Users/Florent/.modelio/3.7/modules/JavaDesigner_3.7.01/JavaDesigner_3.7.01.jmdac\ runtime\ module_.org.modelio.full.perspective.parentId=app.ui.ext_com.partstack.bottom
+org.modelio.diagram.editor.OpenedDiagrams3='Diagramme de classe' {f650f875-d36a-4f8f-82a4-aa82e499e0b4} Standard.ClassDiagram
+org.modelio.module.propertytab.JavaDesigner\ v3.7.01\ GModule\ @file\:///C\:/Users/Florent/.modelio/3.7/modules/JavaDesigner_3.7.01/JavaDesigner_3.7.01.jmdac\ runtime\ module_.org.modelio.diagram.perspective.parentId=app.ui.ext_com.partstack.right
+org.modelio.diagram.editor.OpenedDiagrams2='diagrame d'activit\u00E9 de l'identification' {821e8249-6dd0-4528-901a-3de15f21d609} Standard.ActivityDiagram
+org.modelio.diagram.editor.OpenedDiagrams1='Diagramme de s\u00E9quence' {9768d209-cb39-4145-801d-218ee12ebc66} Standard.SequenceDiagram
+org.modelio.module.propertytab.JavaDesigner\ v3.7.01\ GModule\ @file\:///C\:/Users/Florent/.modelio/3.7/modules/JavaDesigner_3.7.01/JavaDesigner_3.7.01.jmdac\ runtime\ module_.org.modelio.development.perspective.parentId=app.ui.ext_com.partstack.bottom
+org.modelio.diagram.editor.OpenedDiagrams0='Cas d'utilisation' {d28eeb46-84b4-41e9-95a4-8413d1685736} Standard.UseCaseDiagram
+org.modelio.module.propertytab.JavaDesigner\ v3.7.01\ GModule\ @file\:///C\:/Users/Florent/.modelio/3.7/modules/JavaDesigner_3.7.01/JavaDesigner_3.7.01.jmdac\ runtime\ module_.org.modelio.app.ui.model.perspective.parentId=org.modelio.app.bottom.parts
