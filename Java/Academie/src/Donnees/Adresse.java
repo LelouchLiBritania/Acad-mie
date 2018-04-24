@@ -13,6 +13,10 @@ public class Adresse {
 	public String adresse;
 	protected double[] coordonnees;
 	
+	public Adresse() {
+		
+	}
+	
 	public Adresse(int id_adr) {
 		Connection conn = ConnectionJdbc.getInstance();
 		try{

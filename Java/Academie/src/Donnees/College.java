@@ -2,8 +2,9 @@ package Donnees;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import ConnectionJdbc.ConnectionJdbc;
 
@@ -12,6 +13,12 @@ public class College {
 	public final int numeroAcademique;
 	public final Adresse adresse;
 	public String siteInternet;
+	
+	public College() {
+		this.nom = "";
+		this.numeroAcademique = 0;
+		this.adresse = new Adresse ();
+	}
 	
 	public College(int numeroAcademique) {
 		
@@ -49,14 +56,67 @@ public class College {
 		}
 			
 			
-	}
+	
 		
 		
 	
-	/*public Etudiant listeEtudiant(){}
-	 *
-	 * public Enseignant listeEnseignant(){}
-	 */
+	public List<Etudiant> listeEtudiant(){
+		Connection conn = ConnectionJdbc.getInstance();
+		List<Etudiant> l = new ArrayList<Etudiant>();
+		Etudiant e;
+		
+		try {
+			
+			
+			Statement state = conn.createStatement();
+			ResultSet result = state.executeQuery("SELECT id FROM etudiant WHERE id_college = " + this.numeroAcademique);
+			
+			
+			while(result.next()) {
+				e = new Etudiant(result.getInt("id"));
+				l.add(e);
+			}
+			
+			result.close();
+			state.close();
+		}
+		catch(Exception ex){
+			ex.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+		}
+		
+		return l;
+		
+	}
+	 
+	public List<Enseignant> listeEnseignant(){
+		Connection conn = ConnectionJdbc.getInstance();
+		List<Enseignant> l = new ArrayList<Enseignant>();
+		Enseignant e;
+		
+		try {
+			
+			
+			Statement state = conn.createStatement();
+			ResultSet result = state.executeQuery("SELECT id FROM enseignant WHERE id_college_principal = " + this.numeroAcademique + "OR id_college_secondaire = " + this.numeroAcademique);
+			
+			
+			while(result.next()) {
+				e = new Enseignant(result.getInt("id"));
+				l.add(e);
+			}
+			
+			result.close();
+			state.close();
+		}
+		catch(Exception ex){
+			ex.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+		}
+		
+		return l;
+	}
+	
+}
+	 
 	
 	
 
