@@ -1,5 +1,12 @@
 package Donnees;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -15,7 +22,7 @@ public class Enseignant {
 	private String telephone;
 	private String mail;
 	protected final Date datePriseDeFonction;
-	protected College collegePrincipale;
+	protected College collegePrincipal;
 	protected College collegeSecondaire;
 	
 	public Enseignant(int id) {
@@ -38,7 +45,7 @@ public class Enseignant {
 			this.mail = result.getString("mail");
 			this.telephone = result.getString("telephone");
 			priseFonction = result.getDate("prise_de_fonction");
-			this.collegePrincipale = new College(result.getInt("id_college_principal"));
+			this.collegePrincipal = new College(result.getInt("id_college_principal"));
 			int id_sec = result.getInt("id_college_secondaire");
 			if ( !result.wasNull()) {
 				this.collegeSecondaire = new College(id_sec);
@@ -65,6 +72,37 @@ public class Enseignant {
 		this.datePriseDeFonction = datePriseDeFonction;
 	}
 	
+	public void ficheSignaletique() {
+		
+		String filePath = "C:/Users/Florent/eclipse-workspace/Academie/fiche_"+this.prenom+"_"+this.nom; // chemin absolu vers le fichier
+		Path logFile = Paths.get(filePath);
+		if (!Files.exists(logFile)) { // si le fichier n’existe pas on le cree
+			try {
+				Files.createFile(logFile);
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		String s = "";
+		try (BufferedWriter writer = Files.newBufferedWriter(logFile,StandardCharsets.UTF_8, StandardOpenOption.WRITE)) { // buffer en ecriture (ecrase l’existant), encodage UTF8
+			s+="Nom : "+this.nom+"\n";
+			s+="Prenom : "+this.prenom+"\n";
+			s+="Mail : "+this.mail+"\n";
+			s+="Téléphone : "+this.telephone+"\n";
+			s+="Prise de fonction : "+this.datePriseDeFonction+"\n";
+			s+="College principal : " + this.collegePrincipal.nom+"\n";
+			s+="College secondaire : "+this.collegeSecondaire.nom+"\n";
+			
+			writer.write(s);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 	
 
 }

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import ConnectionJdbc.ConnectionJdbc;
 
@@ -54,6 +55,76 @@ public class College {
 		this.siteInternet = siteInternet;
 		
 		}
+	
+	public College(String nom) {
+		Connection conn = ConnectionJdbc.getInstance();
+		
+		int n = 0;
+		List<Integer> listeColleges = new ArrayList<Integer>();
+		
+		try {
+			
+			
+			Statement state = conn.createStatement();
+			ResultSet result = state.executeQuery("SELECT * FROM college WHERE nom ILIKE = " + nom);
+			
+			System.out.println("n°       numéro académique");
+			
+			while(result.next()) {
+				n+=1;
+				listeColleges.add(result.getInt("numero_academique"));
+				System.out.println(n + " : " + result.getInt("numero_academique"));
+			}
+			
+			result.close();
+			state.close();
+		}
+		catch(Exception e){
+			e.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+		}
+		if (n==0) {
+			System.out.println("College inconnu");
+			this.nom = "";
+			this.numeroAcademique = 0;
+			this.adresse = new Adresse ();
+		}
+		
+		else {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("n° du college?");
+			int numeroAcademique = listeColleges.get(sc.nextInt());
+			sc.close();
+			
+			this.numeroAcademique = numeroAcademique;
+			
+			this.nom = nom;
+			double[] coord = {0,0};
+			Adresse adresse = new Adresse("adresse inconnue",coord);
+			String siteInternet = "";
+			
+			try {
+				
+				
+				Statement state = conn.createStatement();
+				ResultSet result = state.executeQuery("SELECT * FROM college WHERE numero_academique = " + numeroAcademique);
+				result.next();
+				
+				
+				adresse = new Adresse(result.getInt("id_adr"));
+				siteInternet = result.getString("site_internet");
+				
+				result.close();
+				state.close();
+			}
+			catch(Exception e){
+				e.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+			}
+			
+			this.adresse = adresse;
+			this.siteInternet = siteInternet;
+		}
+		
+	}
 			
 			
 	
