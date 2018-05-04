@@ -36,8 +36,12 @@ public class Enseignant {
 	protected College collegeSecondaire;
 	
 	/*
-	 * Setters
+	 * Getter and Setters
 	 */
+	public Adresse getAdresse() {
+		return adresse;
+	}
+	
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}

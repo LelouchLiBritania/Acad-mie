@@ -5,19 +5,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import ConnectionJdbc.ConnectionJdbc;
 
 public class Departement {
 	
-	
+	public final String nom;
 	public final int id;
 	public College college;
 	public List<Enseignant> listeEnseignants;
 	public Enseignant responsable;
 	
 	public Departement (Enseignant responsable) {
+		this.nom = "";
 		this.id = 0;
 		this.responsable = responsable;
 		this.listeEnseignants = new ArrayList<Enseignant>();
@@ -25,6 +25,7 @@ public class Departement {
 	}
 	
 	public Departement(int id) {
+		String nom = "";
 		this.id = id;
 		Connection conn = ConnectionJdbc.getInstance();
 		this.listeEnseignants = new ArrayList<Enseignant>();
@@ -39,6 +40,7 @@ public class Departement {
 			
 			this.college = new College(result.getInt("id_college"));
 			this.responsable = new Enseignant(result.getInt("id_responsable"));
+			nom = result.getString("nom");
 			
 			ResultSet result2 = state.executeQuery("SELECT id FROM enseignant WHERE id_dept_principal = "+id+" OR id_dept_secondaire = "+id);
 			Enseignant ens;
@@ -55,6 +57,7 @@ public class Departement {
 		catch(Exception e){
 			e.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
 		}
+		this.nom=nom;
 	}
 	
 	public double moyenne() {
