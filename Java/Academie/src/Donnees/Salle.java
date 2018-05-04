@@ -3,7 +3,6 @@ package Donnees;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 
 import ConnectionJdbc.ConnectionJdbc;
 

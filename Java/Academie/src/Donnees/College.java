@@ -92,7 +92,11 @@ public class College {
 		else {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("n° du college?");
-			int numeroAcademique = listeColleges.get(sc.nextInt());
+			int num = -1;
+			while(0<=num && num<=(n-1)){
+				num = sc.nextInt();
+			}
+			int numeroAcademique = listeColleges.get(num);
 			sc.close();
 			
 			this.numeroAcademique = numeroAcademique;

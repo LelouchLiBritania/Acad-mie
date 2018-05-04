@@ -82,7 +82,7 @@ public class Etudiant {
 				result2 = state.executeQuery("SELECT nom FROM college WHERE id ILIKE = " + result.getInt("id_college"));
 				n+=1;
 				listeEtudiants.add(result.getInt("id"));
-				System.out.println(n + " : " + result.getString("nom")+ result.getString("prenom")+ result.getString("nom")+result2.getString("nom"));
+				System.out.println(n + " : " + result.getString("nom")+ result.getString("prenom")+result2.getString("nom"));
 			}
 			
 			result.close();
@@ -99,21 +99,21 @@ public class Etudiant {
 		
 		else {
 			Scanner sc = new Scanner(System.in);
-			int id = -1;
+			int num = -1;
 			System.out.println("n° de l'étudiant?");
-			while(0<=id && id<=(n-1)){
-				id = sc.nextInt();
+			while(0<=num && num<=(n-1)){
+				num = sc.nextInt();
 			}
 			sc.close();
 			
 			
-			this.id = id;
+			this.id = listeEtudiants.get(num);
 			
 			try {
 				
 				
 				Statement state = conn.createStatement();
-				ResultSet result = state.executeQuery("SELECT * FROM etudiant WHERE id = " + id);
+				ResultSet result = state.executeQuery("SELECT * FROM etudiant WHERE id = " + this.id);
 				result.next();
 				
 				

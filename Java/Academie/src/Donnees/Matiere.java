@@ -61,6 +61,43 @@ public class Matiere {
 		this.nom = nom;
 	}
 	
+	public Matiere (String nom) {
+		Connection conn = ConnectionJdbc.getInstance();
+		
+		this.nom = nom;
+		
+		int id = 0;
+		this.enseignantsMatiere = new ArrayList<Enseignant>();
+		try {
+			
+			
+			Statement state = conn.createStatement();
+			ResultSet result = state.executeQuery("SELECT * FROM matiere WHERE nom = " + nom);
+			result.next();
+			
+			
+			id = result.getInt("id");
+			this.salle = new Salle(result.getInt("id_salle"));
+			
+			ResultSet result2 = state.executeQuery("SELECT id FROM enseignant WHERE id_matiere = " + id);
+			Enseignant ens;
+			while(result2.next()) {
+				ens = new Enseignant(result2.getInt("id"));
+				this.enseignantsMatiere.add(ens);
+			}
+			
+			
+			result.close();
+			state.close();
+		}
+		catch(Exception e){
+			e.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+		}
+		
+		this.id = id;
+		
+	}
+	
 	public double moyenne() {
 		Connection conn = ConnectionJdbc.getInstance();
 		double valeur = 0;
